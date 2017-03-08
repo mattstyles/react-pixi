@@ -1,0 +1,49 @@
+{
+  "name": "react-pixi",
+  "version": "1.0.0",
+  "description": "Very barebones boilerplate with react and pixi",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "budo src/index.js --live"
+  },
+  "author": "Matt Styles",
+  "license": "ISC",
+  "babel": {
+    "presets": [
+      "urban"
+    ],
+    "plugins": [
+      [
+        "transform-react-require",
+        {
+          "identifier": "React",
+          "moduleName": "react"
+        }
+      ]
+    ]
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "babel-plugin-transform-react-require": "^1.0.1",
+    "babel-preset-urban": "^1.0.0",
+    "babelify": "^7.3.0",
+    "browserify": "^14.1.0",
+    "budo": "^9.4.7",
+    "standard": "^9.0.1"
+  },
+  "dependencies": {
+    "eventemitter3": "^2.0.2",
+    "pixi.js": "^4.4.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  }
+}
