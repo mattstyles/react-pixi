@@ -29,26 +29,51 @@ class Game extends Component {
   }
 }
 
-const UI = props => (
-  <div style={{position: 'relative'}}>
+const UI = ({num}) => (
+  <div
+    style={{
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }}
+    onMouseDown={event => {
+      event.preventDefault()
+      signal.emit(actions.add)
+    }
+  }
+  >
     <div
-      onMouseDown={event => signal.emit(
-        actions.add
-      )}
-    >Click Me</div>
+      style={{
+        position: 'absolute',
+        top: 10,
+        right: 10,
+        color: 'white'
+      }}
+    >
+      {`Bunnies: ${num}`}
+    </div>
   </div>
 )
 
 const App = props => (
   <div style={{flex: 1}}>
     <Game />
-    <UI />
+    <UI num={props.num} />
   </div>
 )
 
 load(() => {
   render(
-    <App />,
+    <App num={1} />,
+    element
+  )
+})
+
+signal.on('num', num => {
+  render(
+    <App num={num} />,
     element
   )
 })

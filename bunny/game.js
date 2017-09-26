@@ -1,7 +1,8 @@
 
 import {Application, Sprite} from 'pixi.js'
+import Stats from 'stats.js'
 
-import {screen, physics} from './constants'
+import {screen, physics, game} from './constants'
 import {signal, actions} from './events'
 import {get} from './resources'
 import {rnd, rndInt} from './utils'
@@ -16,6 +17,8 @@ const createBunny = () => {
   sprite.speedY = rnd(10) - 5
   sprite.position.x = rndInt(screen.width)
   sprite.position.y = rndInt(screen.height)
+  sprite.anchor.x = 0.5
+  sprite.anchor.y = 1
   return sprite
 }
 
@@ -55,23 +58,31 @@ export const start = view => {
     backgroundColor: 0x181818
   })
 
-  var sprite = createBunny()
-  var sprites = [sprite]
-  app.stage.addChild(sprite)
-
-  app.ticker.add(() => {
-    update(sprites)
-    app.renderer.render(app.stage)
-  })
-
-  signal.on(actions.add, () => {
-    var num = 1000
-    while (--num) {
+  function addBunnies () {
+    var num = game.toAdd
+    while (num--) {
       var sprite = createBunny()
       sprites.push(sprite)
       app.stage.addChild(sprite)
+      signal.emit('num', sprites.length)
     }
+  }
+
+  var sprites = []
+  addBunnies()
+
+  var stats = new Stats()
+  stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
+  document.body.appendChild(stats.dom)
+
+  app.ticker.add(() => {
+    stats.begin()
+    update(sprites)
+    app.renderer.render(app.stage)
+    stats.end()
   })
+
+  signal.on(actions.add, addBunnies)
 
   return app
 }
