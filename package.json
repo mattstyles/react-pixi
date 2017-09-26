@@ -5,6 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "NODE_ENV=production browserify bunny/index.js | uglifyjs -cm > dist/bundle.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "start": "budo bunny/index.js --live"
   },
   "author": "Matt Styles",
@@ -38,7 +41,9 @@
     "babelify": "^7.3.0",
     "browserify": "^14.1.0",
     "budo": "^9.4.7",
-    "standard": "^9.0.1"
+    "gh-pages": "^1.0.0",
+    "standard": "^9.0.1",
+    "uglifyjs": "^2.4.11"
   },
   "dependencies": {
     "eventemitter3": "^2.0.2",
