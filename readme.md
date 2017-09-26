@@ -3,7 +3,9 @@
 
 > Very quick boilerplate with react and pixi
 
+[https://mattstyles.github.io/react-pixi/](https://mattstyles.github.io/react-pixi/)
+
 ```
-yarn
-yarn start -- -o
+npm
+npm start -- -o
 ```
