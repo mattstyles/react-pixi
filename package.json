@@ -40,7 +40,7 @@
     "babel-preset-urban": "^1.0.0",
     "babelify": "^7.3.0",
     "browserify": "^14.1.0",
-    "budo": "^9.4.7",
+    "budo": "^11.8.4",
     "gh-pages": "^1.0.0",
     "standard": "^9.0.1",
     "uglifyjs": "^2.4.11"
